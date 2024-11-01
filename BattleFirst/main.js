@@ -1,34 +1,34 @@
 #!/usr/bin/node
 /* ******************************************************** *
- * Simple clone of Paper Scissors Rock by robin Goerlach    *
+ * Simple clone of Paper Scissors Rock by Robin Goerlach    *
  * ******************************************************** */
 
 const path = require("path");
 const validChoices = ["rock", "paper", "scissors"];
 
-function getComputerMove() {
-    const randomIndex = Math.floor(Math.random() * validChoices.length);
-    //console.log("Computer chose:", validChoises[randomIndex]);
-    return validChoices[randomIndex];
+function getComputerChoice() {
+  const index = Math.floor(Math.random() * validChoices.length);
+  //console.log("Computer chose:", validChoises[index]);
+  return validChoices[index];
 }
 
-function determineWinner(playerMove, computerMove) {
-    if (playerMove === computerMove) {
-        return "It's a draw!";
-    }
+function determineWinner(player, computer) {
+  if (player === computer) {
+    return "It's a draw!";
+  }
 
-    if (
-        (playerMove === "rock" && computerMove === "scissors") ||
-        (playerMove === "scissors" && computerMove === "paper") ||
-        (playerMove === "paper" && computerMove === "rock")
-    ) {
-        return "Player wins!";
-    } else {
-        return "Computer wins!";
-    }
+  if (
+    (player === "rock" && computer === "scissors") ||
+    (player === "scissors" && computer === "paper") ||
+    (player === "paper" && computer === "rock")
+  ) {
+    return "Player wins!";
+  } else {
+    return "Computer wins!";
+  }
 }
 
-const computerMove = getComputerMove();
+const computer = getComputerChoice();
 
 // Assuming process.argv[1] contains the full path
 const appPath = process.argv[1];
@@ -37,17 +37,21 @@ const argNo = process.argv.length;
 
 // do we have enough aruments to start
 if (argNo != 3) {
-  console.error("You need to run ",appName ," with an argument Paper, Scissors or Rock would be good");
+  console.error(
+    "\nYou need to run ",
+    appName,
+    " with an argument nPaper, Scissors or Rock would be good!\n"
+  );
   return;
 }
 
-// Check valid move 
+// Check valid move
 const playerChoice = process.argv[2].toLowerCase();
 if (!validChoices.includes(playerChoice)) {
   console.error("Your choice is not understood, try Paper, Scissors or Rock");
-  return;	
+  return;
 }
 
 console.log("Player chose:", playerChoice);
-console.log("Computer chose:", computerMove);
-console.log(determineWinner(playerChoice, computerMove));
+console.log("Computer chose:", computer);
+console.log(determineWinner(playerChoice, computer));
